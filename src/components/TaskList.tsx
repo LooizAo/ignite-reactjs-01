@@ -23,29 +23,37 @@ export function TaskList() {
       isComplete: false
     }
 
+    // These two lines below are the same?
     setTasks([...tasks, newTask]);
+    //setTasks(oldState => [...oldState, newTask]);
+
     setNewTaskTitle('');
   }
 
   function handleToggleTaskCompletion(id: number) {
-    const aux = tasks.map(task => {
+    const completedTasks = tasks.map(task => {
       if (task.id === id) {
         task.isComplete = !task.isComplete;
       }
       return task;
     });
+    // const completedTasks = tasks.map(task => task.id === id ? {
+    //   ...task,
+    //   isComplete: !task.isComplete
+    // } : task);
 
-    setTasks(aux);
+    setTasks(completedTasks);
   }
 
   function handleRemoveTask(id: number) {
-    const aux = tasks.filter(task => {
+    const filteredTasks = tasks.filter(task => {
       if (task.id !== id) {
         return task;
       }
     });
+    // const filteredTasks = tasks.filter(task => task.id !== id);
 
-    setTasks(aux);
+    setTasks(filteredTasks);
   }
 
   return (
